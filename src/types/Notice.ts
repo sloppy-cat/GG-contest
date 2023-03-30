@@ -4,7 +4,7 @@ export default interface Notice {
   cretDt: Date;
   cretId: string;
   content: string;
-  files: string[];
+  fileId: string;
 }
 export interface CustomFile {
   id: string | undefined;

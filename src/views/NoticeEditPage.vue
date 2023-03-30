@@ -107,6 +107,9 @@ const fetchNoticeDetail = async () => {
   const response = await api.getNoticeDetail(route.query.noticeId as string).then((r) => {
     console.log(r);
     noticeDetail.value = r.data.value;
+    api.getFile(r.data.value.fileId).then((r: any) => {
+      console.log(r);
+    });
   });
 };
 </script>

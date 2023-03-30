@@ -146,4 +146,18 @@ export default class api {
       return Promise.reject(e);
     }
   }
+
+  // 파일가져오기
+  async getFile(id: string) {
+    try {
+      const config: AxiosRequestConfig = {
+        baseURL: 'http://127.0.0.1:8080',
+        params: { id },
+      };
+      const res = await Axios.get<ResponseBody<any>>('/google/v1/getNoticeFile', config);
+      console.log(res);
+    } catch (e: any) {
+      return Promise.reject(e);
+    }
+  }
 }
