@@ -25,12 +25,7 @@
               <div class="row">
                 <label for="" class="col-sm-2 label">제목</label>
                 <div class="col-sm-10">
-                  <input
-                    type="text"
-                    class="input form-control"
-                    v-model="noticeDetail.title"
-                    id=""
-                  />
+                  <input type="text" class="input form-control" v-model="noticeDetail.title" id="" />
                 </div>
               </div>
               <div class="row">
@@ -46,8 +41,7 @@
                     class="form-control"
                     id="exampleFormControlTextarea1"
                     rows="8"
-                    v-model="noticeDetail.content"
-                  ></textarea>
+                    v-model="noticeDetail.content"></textarea>
                 </div>
               </div>
               <div class="row">
@@ -64,8 +58,8 @@
           </div>
           <div class="comp-footer">
             <div class="btn-wrap">
-              <button class="md-btn bg-blue">수정</button>
-              <button class="md-btn bg-border">취소</button>
+              <button class="md-btn bg-blue" @click="onClickSave">수정</button>
+              <button class="md-btn bg-border" @click="onClickCancel">취소</button>
             </div>
           </div>
         </div>
@@ -94,22 +88,37 @@ import CustomHeader from '../components/CustomHeader.vue';
 import { ref, onMounted, type Ref } from 'vue';
 import Notice from '../types/Notice';
 import Api from '../api';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 
 const route = useRoute();
 const api = new Api();
 const noticeDetail = ref<Notice | null>(null);
+const router = useRouter();
 
 onMounted(() => {
   fetchNoticeDetail();
 });
 const fetchNoticeDetail = async () => {
-  const response = await api.getNoticeDetail(route.query.noticeId as string).then((r) => {
+  const response = await api.getNoticeDetail(route.query.noticeId as string).then(r => {
     console.log(r);
     noticeDetail.value = r.data.value;
     api.getFile(r.data.value.fileId).then((r: any) => {
       console.log(r);
     });
+  });
+};
+
+// 이거 API 호출하는걸로 바꿔야댐
+const onClickSave = () => {
+  console.log('save');
+  router.push({
+    name: 'notice',
+  });
+};
+const onClickCancel = () => {
+  console.log('cancel');
+  router.push({
+    name: 'notice',
   });
 };
 </script>
