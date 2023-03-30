@@ -66,7 +66,7 @@
           <div class="comp-footer">
             <div class="btn-wrap">
               <button class="md-btn bg-blue" @click="createNotice()">저장</button>
-              <button class="md-btn bg-border">취소</button>
+              <button class="md-btn bg-border" @click="onClickCancel">취소</button>
             </div>
           </div>
         </div>
@@ -228,6 +228,13 @@ const addFile = (evt: Event) => {
     fileElement.value = '';
     target.value = '';
   }
+};
+
+const onClickCancel = () => {
+  console.log('tet');
+  router.push({
+    name: 'notice',
+  });
 };
 </script>
 
