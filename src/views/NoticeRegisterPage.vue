@@ -98,6 +98,7 @@ import CustomHeader from '../components/CustomHeader.vue';
 import jwt_decode from 'jwt-decode';
 import { VueCookieNext } from 'vue-cookie-next';
 import { useRouter } from 'vue-router';
+import { continueStatement } from '@babel/types';
 
 const decodedToken: Ref<any> = ref({});
 const api = new Api();
@@ -133,13 +134,19 @@ const createNotice = () => {
   const formData = new FormData();
   formData.append('notice', blob);
   // attachments
-  // if (reqCreateNotice.value.files != undefined) {
-  //   for (let index = 0; index < reqCreateNotice.value.files.length; index++) {
-  //     const element = reqCreateNotice.value.files[index];
-  //     formData.append('file', element);
-  //   }
-  // }
+
+  if (attachFiles.value.length > 0) {
+    reqCreateNotice.value.files = attachFiles.value;
+  }
+
+  if (reqCreateNotice.value.files != undefined) {
+    for (let index = 0; index < reqCreateNotice.value.files.length; index++) {
+      const element = reqCreateNotice.value.files[index];
+      formData.append('file', element);
+    }
+  }
   console.log(formData.getAll('notice'));
+  console.log(formData.getAll('file'));
 
   // if (reqCreateNotice.value.files != undefined) {
   //   for (let index = 0; index < reqCreateNotice.value.files.length; index++) {
@@ -184,7 +191,7 @@ const addFile = (evt: Event) => {
   }
 
   const files = target.files;
-  console.log('ttt: ', files);
+  console.log(files);
   if (files != null && files.length > 0) {
     if (files[0].size > 15000000) {
       const fileElement = document.getElementsByClassName(target.className)[0] as HTMLInputElement;
@@ -209,7 +216,7 @@ const addFile = (evt: Event) => {
       fileElement.value = '';
       return;
     }
-    attachFiles.value = [...attachFiles.value, ...target.files];
+    attachFiles.value = [...attachFiles.value, target.files[0]];
     // let fileList = target.files;
     // attachFiles.value = [...attachFiles.value];
 
