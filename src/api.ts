@@ -6,7 +6,7 @@ import type { ReqBodyCreateNotice, ReqBodyEditNotice, ResponseNoticeList } from 
 import { ResponseBody } from './types/Util';
 
 const dummyToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiJiZWFzdEBrdC5jb20iLCJzdWIiOiJ1c2VyIiwiaWF0IjoxNjgwMTQ3NzEzLCJleHAiOjE2ODAxNjU3MTN9.F5HyeWNDvfXzC7HpRnL8FE4zV2xdKZe9doNRBlB1sjE--TjZ90ThrdkSAuRF_WsAZAgLsX_BNkQ4VIr3jMRBv10yxmMr-lFQIR6aWk7hmN81S4Mi--vlYskUNPXRwDVBmP7DJjiEAjrQNX3RzHI1vT3na-i3t7feHj6smH-Bgk0sQ2nNVcyNUj4PNgA9WEPlpwRBSesqxxoimZIcKsnWyOwVm9eqPSggJ-0bJcO2ERjUp0NdCOtfeOy8ktwEIHKQlLv2hzwIT4IuAkolvbP5nBjBzYgItI0NmP9c0sjv3rKYsellBDczaAh2YzsYHgNoefrIJsoaz2qQPf3lEgmMLA';
+  'eyJ0eXBlIjoiSldUIiwiYWxnIjoiUlMyNTYifQ.eyJ1c2VyTm0iOiLstZzshJ3sm5AiLCJ1c2VySWQiOiJqZXJyeV9jaG9pQG5hdmVyLmNvbSJ9.S-PjCwqBxM16eA0k9JIlfSLITD1-byiaV57sBT7K-Hf1AwJX83KtSvMzQ8ECepWRWidvZPodDvlgMycM30PnCCjyzrXUPHzxNoom3HxtSjQMGce4CqRJU6UFyJLBdDVXNginf-9RVUNjbe5PI6iabK7g3sT88ekGzj7BrdsaXv0';
 const dummyList: ResponseNoticeList[] = [];
 for (let i = 1; i <= 37; i++) {
   dummyList.push({
@@ -23,7 +23,12 @@ export default class api {
   async login(reqBodyLoginUser: ReqBodyLoginUser) {
     try {
       // response type 지정
-      // const res = await Axios.post('/login', reqBodyLoginUser);
+      // const config: AxiosRequestConfig = {
+      //   baseURL: 'http://127.0.0.1:8080',
+      //   data: reqBodyLoginUser,
+      // };
+
+      // const res = await Axios.post('/google/v1/signIn', reqBodyLoginUser);
       // return Promise.resolve(res);
       //dummy
       console.log(reqBodyLoginUser);
