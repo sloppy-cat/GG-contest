@@ -103,7 +103,8 @@
                       </div>
                       <p class="text-start text gap-5">
                         <small class="text-dark"
-                          ><strong>Date :</strong>{{ notice.createTime }}</small
+                          ><strong>Date :</strong
+                          >{{ notice.createTime.toString().slice(0, 10) }}</small
                         >
                         <small class="text-dark"
                           ><strong>작성자 :</strong>{{ notice.createUser }}</small

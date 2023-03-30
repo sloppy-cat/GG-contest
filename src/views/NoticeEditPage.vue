@@ -31,7 +31,7 @@
               <div class="row">
                 <label for="" class="col-sm-2 label">date</label>
                 <div class="col-sm-10">
-                  <span class="input-txt">2023-03-28</span>
+                  <span class="input-txt">{{ new Date().toISOString().slice(0, 10) }}</span>
                 </div>
               </div>
               <div class="row">
@@ -85,6 +85,23 @@
 
 <script setup lang="ts">
 import CustomHeader from '../components/CustomHeader.vue';
+import { ref, onMounted, type Ref } from 'vue';
+import Notice from '../types/Notice';
+import Api from '../api';
+const api = new Api();
+const noticeDetail = ref<Notice>();
+const props = defineProps<{
+  noticeId: string;
+}>();
+onMounted(() => {
+  fetchNoticeDetail();
+});
+const fetchNoticeDetail = async () => {
+  const response = await api.getNoticeDetail(props.noticeId).then((r) => {
+    console.log(r);
+    noticeDetail.value = JSON.parse(JSON.stringify(r));
+  });
+};
 </script>
 
 <style scoped></style>

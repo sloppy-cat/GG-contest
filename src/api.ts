@@ -82,10 +82,31 @@ export default class api {
   }
 
   // 공지사항 상세
-  async getNoticeDetail(noticeId: string) {
+  async getNoticeDetail(noticeId: string): Promise<ResponseBody<Notice>> {
     try {
-      const res = await Axios.get<Notice>('/noticeDetail', { params: { noticeId } });
-      return Promise.resolve(res);
+      // const res = await Axios.get<Notice>('/noticeDetail', { params: { noticeId } });
+      //dummy
+      let dum = dummyList.filter((notice) => notice.id === noticeId)[0];
+
+      let resBody: ResponseBody<Notice> = {
+        common: {
+          code: 200,
+          message: '성공이에요',
+        },
+        data: {
+          value: {
+            id: dum.id,
+            title: dum.title,
+            createTime: dum.createTime,
+            createUser: dum.createUser,
+            content: dum.content,
+            files: [],
+          },
+          pagination: undefined,
+        },
+      };
+
+      return Promise.resolve(resBody);
     } catch (e: any) {
       return Promise.reject(e);
     }
