@@ -60,9 +60,9 @@ async function login() {
   useApi
     .login(reqBodyLoginUser.value)
     .then((res) => {
-      alert(
-        `id: ${reqBodyLoginUser.value.userId} , pwd: ${reqBodyLoginUser.value.pwd} 로 로그인합니다 감사합니다`
-      );
+      // alert(
+      //   `id: ${reqBodyLoginUser.value.userId} , pwd: ${reqBodyLoginUser.value.pwd} 로 로그인합니다 감사합니다`
+      // );
       console.log(getDecodedAccessToken(res.token));
       let tmpDate = new Date();
       tmpDate.setFullYear(2099);
