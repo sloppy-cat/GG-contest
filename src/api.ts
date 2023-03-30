@@ -12,12 +12,12 @@ export default class api {
       // response type 지정
       // const res = await Axios.post('/login', reqBodyLoginUser);
       // return Promise.resolve(res);
-      console.log(reqBodyLoginUser);
       //dummy
-      alert(
-        `id: ${reqBodyLoginUser.userId} , pwd: ${reqBodyLoginUser.pwd} 로 로그인합니다 감사합니다`
-      );
-
+      console.log(reqBodyLoginUser);
+      //dummy error
+      if (reqBodyLoginUser.userId == 'fail') {
+        return Promise.reject();
+      }
       return Promise.resolve({ token: dummyToken });
     } catch (e: any) {
       return Promise.reject(e);

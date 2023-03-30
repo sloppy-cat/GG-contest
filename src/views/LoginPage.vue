@@ -40,11 +40,15 @@ import { ref, type Ref } from 'vue';
 import api from '../api';
 import { ReqBodyLoginUser } from '../types/User';
 import jwt_decode from 'jwt-decode';
+import { VueCookieNext } from 'vue-cookie-next';
+import { useRouter } from 'vue-router';
 const useApi = new api();
 const reqBodyLoginUser: Ref<ReqBodyLoginUser> = ref({
   userId: '',
   pwd: '',
 });
+
+const router = useRouter();
 
 function getDecodedAccessToken<T>(token: string) {
   return jwt_decode<T>(token);
@@ -52,9 +56,27 @@ function getDecodedAccessToken<T>(token: string) {
 
 async function login() {
   console.log(reqBodyLoginUser);
-  useApi.login(reqBodyLoginUser.value).then((res) => {
-    console.log(getDecodedAccessToken(res.token));
-  });
+  useApi
+    .login(reqBodyLoginUser.value)
+    .then((res) => {
+      alert(
+        `id: ${reqBodyLoginUser.value.userId} , pwd: ${reqBodyLoginUser.value.pwd} 로 로그인합니다 감사합니다`
+      );
+      console.log(getDecodedAccessToken(res.token));
+      let tmpDate = new Date();
+      tmpDate.setFullYear(2099);
+
+      VueCookieNext.setCookie('jwt', res.token, {
+        expire: tmpDate.toUTCString(),
+      });
+
+      router.push('/notice');
+    })
+    .catch((e: any) => {
+      alert('로그인 정보를 다시 확인해주세요');
+      reqBodyLoginUser.value.pwd = '';
+      reqBodyLoginUser.value.userId = '';
+    });
 }
 </script>
 
