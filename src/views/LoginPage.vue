@@ -74,7 +74,7 @@ async function login() {
       router.push('/notice');
     })
     .catch((e: any) => {
-      alert('로그인 정보를 다시 확인해주세요');
+      alert('입력하신 정보를 확인해 주세요.');
       reqBodyLoginUser.value.pwd = '';
       reqBodyLoginUser.value.userId = '';
     });

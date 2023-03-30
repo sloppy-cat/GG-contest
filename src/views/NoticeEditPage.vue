@@ -3,24 +3,7 @@
     <div id="skipNavi">
       <a href="#contents">본문 바로가기</a>
     </div>
-    <header>
-      <div class="header-wrap">
-        <div class="logo"></div>
-        <nav>
-          <ul class="nav-menu">
-            <li class="active"><a href="">공지사항</a></li>
-          </ul>
-          <ul class="member-menu">
-            <li><span class="name">홍길동</span>님</li>
-            <li>
-              <a href="">
-                <i class="bi bi-box-arrow-right"></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <CustomHeader />
     <!-- page  -->
     <section id="contents">
       <div id="sub-page">
@@ -54,7 +37,11 @@
               <div class="row">
                 <label for="exampleFormControlTextarea1" class="col-sm-2 label">의뢰 내용</label>
                 <div class="col-sm-10">
-                  <textarea class="form-control" id="exampleFormControlTextarea1" rows="8"></textarea>
+                  <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="8"
+                  ></textarea>
                 </div>
               </div>
               <div class="row">
@@ -96,6 +83,8 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import CustomHeader from '../components/CustomHeader.vue';
+</script>
 
 <style scoped></style>

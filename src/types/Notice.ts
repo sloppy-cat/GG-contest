@@ -4,7 +4,7 @@ export default interface Notice {
   createTime: Date;
   createUser: string;
   content: string;
-  files: CustomFile[];
+  files: string[];
 }
 export interface CustomFile {
   id: string | undefined;
