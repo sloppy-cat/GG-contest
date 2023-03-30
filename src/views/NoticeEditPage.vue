@@ -76,7 +76,7 @@
 
         <div class="comp-footer">
           <div class="btn-wrap">
-            <button class="md-btn bg-blue">저장</button>
+            <button class="md-btn bg-blue">수정</button>
             <button class="md-btn bg-border">취소</button>
           </div>
         </div>
