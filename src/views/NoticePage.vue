@@ -1,0 +1,159 @@
+<template>
+  <header>
+    <div class="header-wrap">
+      <div class="logo"></div>
+
+      <nav>
+        <ul class="nav-menu">
+          <li class="active"><a href="">공지사항</a></li>
+        </ul>
+
+        <ul class="member-menu">
+          <li><span class="name">홍길동</span>님</li>
+          <li>
+            <a href="">
+              <i class="bi bi-box-arrow-right"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- page  -->
+  <section id="contents">
+    <div id="sub-page">
+      <div class="comp-wrap vertical-wrap">
+        <div class="row">
+          <div class="comp-left col-sm-3">
+            <h1 class="h1-tit">공지사항</h1>
+
+            <div class="menu-group gap-3">
+              <ul class="list-menu">
+                <li class="active">
+                  <i class="bi bi-box-seam"></i>
+                  <a href="">목록</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="comp-right col-sm-9">
+            <div class="comp-header">
+              <h1 class="h1-tit">공지사항</h1>
+
+              <div class="direct-comp">
+                <a href="">
+                  <i class="bi bi-house-door-fill"></i>
+                </a>
+                <span>
+                  <i class="bi bi-chevron-right"></i>
+                </span>
+                <a href="">공지사항</a>
+              </div>
+            </div>
+
+            <div class="comp-contents">
+              <div class="search-wrap">
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button
+                        class="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#collapseOne"
+                        aria-expanded="true"
+                        aria-controls="collapseOne">
+                        검색조건
+                      </button>
+                    </h2>
+
+                    <div
+                      id="collapseOne"
+                      class="accordion-collapse collapse show"
+                      aria-labelledby="headingOne"
+                      data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="input-group">
+                          <select class="select form-select" aria-label="Default select example">
+                            <option selected>전체</option>
+                          </select>
+                          <input
+                            type="text"
+                            class="input form-control"
+                            placeholder=""
+                            aria-label=""
+                            aria-describedby="button-addon2" />
+                          <button class="btn btn-secondary" type="button" id="button-addon2">
+                            <i class="bi bi-search"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex mt-5">
+                <h4 class="h4-tit mb-3 col">Total : <span>120</span>건</h4>
+                <button class="sm-btn bg-blue"><i class="bi bi-cursor-fill mx-1"></i>등록</button>
+              </div>
+
+              <div class="tb-form">
+                <div class="row">
+                  <div class="comp mx-3">
+                    <div class="d-flex justify-content-between">
+                      <h4 class="h4-tit">제목제목제몯</h4>
+                    </div>
+
+                    <p class="text-start text gap-5">
+                      <small class="text-dark"><strong>Date :</strong>2022-12-13</small>
+                      <small class="text-dark"><strong>작성자 :</strong>도경수</small>
+                    </p>
+
+                    <p class="text-start text">
+                      의뢰 내용 (2줄 정도).. 의뢰 내용 (2줄 정도) .. 의뢰 내용 (2줄 정도) 의뢰 내용 (2줄 정도) .. 의뢰
+                      내용 (2줄 정도) .. 의뢰 내용 (2줄 정도)의뢰 내용 (2줄 정도).. 의뢰 내용 (2줄 정도) .. 의뢰 내용
+                      (2줄 정도) 의뢰 내용 (2줄 정도) .. 의뢰 내용 (2줄 정도) .. 의뢰 내용 (2줄 정도)의뢰 내용 (2줄
+                      정도).. 의뢰 내용 (2줄 정도) ..
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="comp-footer">
+              <div class="btn-group" role="group" aria-label="First group">
+                <button type="button" class="btn btn-outline-secondary">1</button>
+                <button type="button" class="btn btn-outline-secondary">2</button>
+                <button type="button" class="btn btn-outline-secondary">3</button>
+                <button type="button" class="btn btn-outline-secondary">4</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- // page  -->
+
+  <!-- footer begin  -->
+  <footer>
+    <div class="footer-wrap">
+      <div class="footer-link">
+        <div class="box">
+          <a href="" target="_blank">개인정보처리방침</a>
+          <a href="" target="_blank">이용약관</a>
+          <a href="" target="_blank">FAQ</a>
+          <a href="" target="_blank">문의</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- //footer end  -->
+</template>
+
+<script setup lang="ts"></script>
+
+<style scoped></style>
