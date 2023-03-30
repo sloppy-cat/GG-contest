@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import Axios, { AxiosRequestConfig } from 'axios';
 import type { AxiosResponse, CancelTokenSource } from 'axios';
 import type { ReqBodyLoginUser } from './types/User';
 import type Notice from './types/Notice';
@@ -11,7 +11,7 @@ const dummyList: ResponseNoticeList[] = [];
 for (let i = 1; i <= 37; i++) {
   dummyList.push({
     id: `${i}`,
-    title: '공지입니다',
+    title: `${i}번 공지입니다`,
     createTime: new Date(),
     createUser: `이진솔${i}`,
     content:
@@ -43,11 +43,17 @@ export default class api {
     value?: string
   ): Promise<ResponseBody<ResponseNoticeList[]>> {
     try {
-      // const res = await Axios.get<ResponseNoticeList[]>('/notice');
+      const config: AxiosRequestConfig = { baseURL: 'http://127.0.0.1:8080' };
+      const res = await Axios.get<ResponseBody<ResponseNoticeList[]>>(
+        '/google/v1/getNoticeList',
+        config
+      );
+      let dum = res.data.data.value;
       // return Promise.resolve(res);
 
       //dummy
-      let dum: ResponseNoticeList[] = JSON.parse(JSON.stringify(dummyList));
+      // let dum: ResponseNoticeList[] = JSON.parse(JSON.stringify(dummyList));
+
       if (target != '' && value) {
         dum = dum.filter((notice) => {
           if (target === '전체') {
@@ -86,8 +92,11 @@ export default class api {
     try {
       // const res = await Axios.get<Notice>('/noticeDetail', { params: { noticeId } });
       //dummy
-      let dum = dummyList.filter((notice) => notice.id === noticeId)[0];
-
+      let dum = dummyList.filter((notice) => {
+        console.log(notice.id, noticeId);
+        return notice.id == noticeId;
+      })[0];
+      console.log(dum);
       let resBody: ResponseBody<Notice> = {
         common: {
           code: 200,

@@ -20,12 +20,17 @@
               <a href="">공지사항</a>
             </div>
           </div>
-          <div class="comp-contents">
+          <div v-if="noticeDetail" class="comp-contents">
             <div class="tb-form">
               <div class="row">
                 <label for="" class="col-sm-2 label">제목</label>
                 <div class="col-sm-10">
-                  <input type="text" class="input form-control" id="" />
+                  <input
+                    type="text"
+                    class="input form-control"
+                    v-model="noticeDetail.title"
+                    id=""
+                  />
                 </div>
               </div>
               <div class="row">
@@ -41,6 +46,7 @@
                     class="form-control"
                     id="exampleFormControlTextarea1"
                     rows="8"
+                    v-model="noticeDetail.content"
                   ></textarea>
                 </div>
               </div>
@@ -88,18 +94,19 @@ import CustomHeader from '../components/CustomHeader.vue';
 import { ref, onMounted, type Ref } from 'vue';
 import Notice from '../types/Notice';
 import Api from '../api';
+import { useRoute } from 'vue-router';
+
+const route = useRoute();
 const api = new Api();
-const noticeDetail = ref<Notice>();
-const props = defineProps<{
-  noticeId: string;
-}>();
+const noticeDetail = ref<Notice | null>(null);
+
 onMounted(() => {
   fetchNoticeDetail();
 });
 const fetchNoticeDetail = async () => {
-  const response = await api.getNoticeDetail(props.noticeId).then((r) => {
+  const response = await api.getNoticeDetail(route.query.noticeId as string).then((r) => {
     console.log(r);
-    noticeDetail.value = JSON.parse(JSON.stringify(r));
+    noticeDetail.value = r.data.value;
   });
 };
 </script>

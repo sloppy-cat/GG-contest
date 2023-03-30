@@ -96,7 +96,12 @@
                   </button>
                 </div>
                 <div class="tb-form">
-                  <div class="row" v-for="(notice, index) in selectedList" :key="index">
+                  <div
+                    class="row"
+                    v-for="(notice, index) in selectedList"
+                    :key="index"
+                    @click="router.push(`/notice-edit?noticeId=${notice.id}`)"
+                  >
                     <div class="comp mx-3">
                       <div class="d-flex justify-content-between">
                         <h4 class="h4-tit">{{ notice.title }}</h4>
@@ -180,6 +185,7 @@ import { ResponseNoticeList } from '../types/Notice';
 import Api from '../api';
 import { Pagination } from '../types/Util';
 import CustomHeader from '../components/CustomHeader.vue';
+import { useRouter } from 'vue-router';
 
 const noticeList: Ref<ResponseNoticeList[]> = ref([]);
 const pagination: Ref<Pagination | undefined> = ref({});
@@ -187,7 +193,7 @@ const searchOption = ref('전체');
 const searchString = ref('');
 const api = new Api();
 const page = ref(1);
-
+const router = useRouter();
 onMounted(() => {
   fetchNoticeList();
 });
