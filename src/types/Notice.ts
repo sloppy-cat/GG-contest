@@ -15,10 +15,12 @@ export interface CustomFile {
 }
 
 export interface ReqBodyCreateNotice {
-  createUser: string;
-  title: string;
-  content: string;
-  files: CustomFile[];
+  notice: {
+    createUser: string;
+    title: string;
+    content: string;
+  };
+  files: File[];
 }
 
 export interface ReqBodyEditNotice {
