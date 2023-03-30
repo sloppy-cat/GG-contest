@@ -6,7 +6,6 @@ export default interface Notice {
   content: string;
   files: CustomFile[];
 }
-
 export interface CustomFile {
   id: string | undefined;
   fileNm: string;
@@ -28,4 +27,12 @@ export interface ReqBodyEditNotice {
   createUser: string;
   content: string;
   files: CustomFile[];
+}
+
+export interface ResponseNoticeList {
+  id: string;
+  title: string;
+  createTime: Date;
+  createUser: string;
+  content: string;
 }
