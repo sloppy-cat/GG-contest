@@ -72,7 +72,7 @@
                             <select
                               class="select form-select"
                               aria-label="Default select example"
-                              @onChange="onChangeSearchOption">
+                              @change="onChangeSearchOption">
                               <option selected>전체</option>
                               <option>제목</option>
                               <option>작성자</option>
