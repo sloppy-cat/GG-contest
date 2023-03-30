@@ -1,8 +1,8 @@
 export default interface Notice {
   id: string;
   title: string;
-  createTime: Date;
-  createUser: string;
+  cretDt: Date;
+  cretId: string;
   content: string;
   files: string[];
 }
@@ -34,7 +34,7 @@ export interface ReqBodyEditNotice {
 export interface ResponseNoticeList {
   id: string;
   title: string;
-  createTime: Date;
-  createUser: string;
+  cretDt: Date;
+  cretId: string;
   content: string;
 }
