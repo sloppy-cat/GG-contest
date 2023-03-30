@@ -1,8 +1,5 @@
 <template>
   <div class="sub-layer">
-    <div id="skipNavi">
-      <a href="#contents">본문 바로가기</a>
-    </div>
     <header>
       <div class="header-wrap">
         <div class="logo"></div>
@@ -72,16 +69,27 @@
                         data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                           <div class="input-group">
-                            <select class="select form-select" aria-label="Default select example">
+                            <select
+                              class="select form-select"
+                              aria-label="Default select example"
+                              @onChange="onChangeSearchOption">
                               <option selected>전체</option>
+                              <option>제목</option>
+                              <option>작성자</option>
+                              <option>내용</option>
                             </select>
                             <input
                               type="text"
                               class="input form-control"
                               placeholder=""
                               aria-label=""
-                              aria-describedby="button-addon2" />
-                            <button class="btn btn-secondary" type="button" id="button-addon2">
+                              aria-describedby="button-addon2"
+                              v-model="searchString" />
+                            <button
+                              class="btn btn-secondary"
+                              type="button"
+                              id="button-addon2"
+                              @click="onClickSearchButton">
                               <i class="bi bi-search"></i>
                             </button>
                           </div>
@@ -91,14 +99,33 @@
                   </div>
                 </div>
                 <div class="d-flex mt-5">
-                  <h4 class="h4-tit mb-3 col">Total : <span>120</span>건</h4>
-                  <button class="sm-btn bg-blue"><i class="bi bi-cursor-fill mx-1"></i>등록</button>
+                  <h4 class="h4-tit mb-3 col">
+                    Total : <span>{{ noticeList.length }}</span
+                    >건
+                  </h4>
+                  <button class="sm-btn bg-blue" @click="$router.push({ name: 'notice-register' })">
+                    <i class="bi bi-cursor-fill mx-1"></i>등록
+                  </button>
                 </div>
                 <div class="tb-form">
-                  <div class="row">
+                  <div class="row" v-for="(notice, index) in noticeList" :key="index">
                     <div class="comp mx-3">
                       <div class="d-flex justify-content-between">
-                        <h4 class="h4-tit">제목제목제몯</h4>
+                        <h4 class="h4-tit">{{ notice.title }}</h4>
+                      </div>
+                      <p class="text-start text gap-5">
+                        <small class="text-dark"><strong>Date :</strong>{{ notice.createTime }}</small>
+                        <small class="text-dark"><strong>작성자 :</strong>{{ notice.createUser }}</small>
+                      </p>
+                      <p class="text-start text">
+                        {{ notice.content }}
+                      </p>
+                    </div>
+                  </div>
+                  <!-- <div class="row">
+                    <div class="comp mx-3">
+                      <div class="d-flex justify-content-between">
+                        <h4 class="h4-tit">제목제목제목</h4>
                       </div>
                       <p class="text-start text gap-5">
                         <small class="text-dark"><strong>Date :</strong>2022-12-13</small>
@@ -111,7 +138,7 @@
                         정도).. 의뢰 내용 (2줄 정도) ..
                       </p>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
               <div class="comp-footer">
@@ -145,6 +172,43 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { ref, type Ref, onMounted } from 'vue';
+import { ResponseNoticeList } from '../types/Notice';
+import Api from '../api';
+
+const noticeList: Ref<ResponseNoticeList[]> = ref([]);
+const searchOption = ref('');
+const searchString = ref('');
+const api = new Api();
+
+onMounted(() => {
+  fetchNoticeList();
+});
+
+// Notice List 호출 메소드
+// onMounted 에서 호출해서 뿌려주기 (modal Progress)
+// 등록버튼 클릭
+
+const fetchNoticeList = async () => {
+  const response = await api.getNoticeList().then(r => {
+    console.log(r);
+    noticeList.value = JSON.parse(JSON.stringify(r));
+  });
+};
+
+const onChangeSearchOption = (e: any) => {
+  console.log(e.target.value);
+};
+
+const inputSearch = (e: any) => {
+  console.log('test');
+  searchString.value = e.target.value;
+};
+
+const onClickSearchButton = (e: any) => {
+  console.log(searchString.value);
+};
+</script>
 
 <style scoped></style>
