@@ -3,3 +3,8 @@ export default interface User {
   userNm: string;
   userId: string;
 }
+
+export interface ReqBodyLoginUser {
+  userId: string;
+  pwd: string;
+}
