@@ -21,6 +21,7 @@
               class="input"
               v-model="reqBodyLoginUser.pwd"
               placeholder="비밀번호 입력"
+              @keyup.enter="login"
             />
           </div>
           <div class="btn-wrap login-comp mb-5">
