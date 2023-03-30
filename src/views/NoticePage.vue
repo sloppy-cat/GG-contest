@@ -1,23 +1,6 @@
 <template>
   <div class="sub-layer">
-    <header>
-      <div class="header-wrap">
-        <div class="logo"></div>
-        <nav>
-          <ul class="nav-menu">
-            <li class="active"><a href="">공지사항</a></li>
-          </ul>
-          <ul class="member-menu">
-            <li><span class="name">홍길동</span>님</li>
-            <li>
-              <a href="">
-                <i class="bi bi-box-arrow-right"></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <CustomHeader />
     <!-- page  -->
     <section id="contents">
       <div id="sub-page">
@@ -58,7 +41,8 @@
                           data-bs-toggle="collapse"
                           data-bs-target="#collapseOne"
                           aria-expanded="true"
-                          aria-controls="collapseOne">
+                          aria-controls="collapseOne"
+                        >
                           검색조건
                         </button>
                       </h2>
@@ -66,13 +50,15 @@
                         id="collapseOne"
                         class="accordion-collapse collapse show"
                         aria-labelledby="headingOne"
-                        data-bs-parent="#accordionExample">
+                        data-bs-parent="#accordionExample"
+                      >
                         <div class="accordion-body">
                           <div class="input-group">
                             <select
                               class="select form-select"
                               aria-label="Default select example"
-                              @change="onChangeSearchOption">
+                              @change="onChangeSearchOption"
+                            >
                               <option selected>전체</option>
                               <option>제목</option>
                               <option>작성자</option>
@@ -84,12 +70,14 @@
                               placeholder=""
                               aria-label=""
                               aria-describedby="button-addon2"
-                              v-model="searchString" />
+                              v-model="searchString"
+                            />
                             <button
                               class="btn btn-secondary"
                               type="button"
                               id="button-addon2"
-                              @click="onClickSearchButton">
+                              @click="onClickSearchButton"
+                            >
                               <i class="bi bi-search"></i>
                             </button>
                           </div>
@@ -108,14 +96,18 @@
                   </button>
                 </div>
                 <div class="tb-form">
-                  <div class="row" v-for="(notice, index) in noticeList" :key="index">
+                  <div class="row" v-for="(notice, index) in selectedList" :key="index">
                     <div class="comp mx-3">
                       <div class="d-flex justify-content-between">
                         <h4 class="h4-tit">{{ notice.title }}</h4>
                       </div>
                       <p class="text-start text gap-5">
-                        <small class="text-dark"><strong>Date :</strong>{{ notice.createTime }}</small>
-                        <small class="text-dark"><strong>작성자 :</strong>{{ notice.createUser }}</small>
+                        <small class="text-dark"
+                          ><strong>Date :</strong>{{ notice.createTime }}</small
+                        >
+                        <small class="text-dark"
+                          ><strong>작성자 :</strong>{{ notice.createUser }}</small
+                        >
                       </p>
                       <p class="text-start text">
                         {{ notice.content }}
@@ -143,10 +135,19 @@
               </div>
               <div class="comp-footer">
                 <div class="btn-group" role="group" aria-label="First group">
-                  <button type="button" class="btn btn-outline-secondary">1</button>
-                  <button type="button" class="btn btn-outline-secondary">2</button>
-                  <button type="button" class="btn btn-outline-secondary">3</button>
-                  <button type="button" class="btn btn-outline-secondary">4</button>
+                  <button
+                    v-for="(num, idx) in btList"
+                    :key="idx"
+                    type="button"
+                    class="btn btn-outline-secondary"
+                    @click="page = num + 1"
+                    :style="{
+                      backgroundColor: page == num + 1 ? 'gray' : 'white',
+                      color: page == num + 1 ? 'white' : 'gray',
+                    }"
+                  >
+                    {{ num + 1 }}
+                  </button>
                 </div>
               </div>
             </div>
@@ -173,14 +174,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref, onMounted } from 'vue';
+import { ref, type Ref, onMounted, computed } from 'vue';
 import { ResponseNoticeList } from '../types/Notice';
 import Api from '../api';
+import { Pagination } from '../types/Util';
+import CustomHeader from '../components/CustomHeader.vue';
 
 const noticeList: Ref<ResponseNoticeList[]> = ref([]);
-const searchOption = ref('');
+const pagination: Ref<Pagination | undefined> = ref({});
+const searchOption = ref('전체');
 const searchString = ref('');
 const api = new Api();
+const page = ref(1);
 
 onMounted(() => {
   fetchNoticeList();
@@ -189,25 +194,28 @@ onMounted(() => {
 // Notice List 호출 메소드
 // onMounted 에서 호출해서 뿌려주기 (modal Progress)
 // 등록버튼 클릭
-
+const btList = computed(() => {
+  return [...Array(Math.ceil((pagination.value?.totalElements ?? 0) / 10)).keys()];
+});
+const selectedList = computed(() => {
+  return noticeList.value.slice((page.value - 1) * 10, page.value * 10);
+});
 const fetchNoticeList = async () => {
-  const response = await api.getNoticeList().then(r => {
+  const response = await api.getNoticeList(searchOption.value, searchString.value).then((r) => {
     console.log(r);
-    noticeList.value = JSON.parse(JSON.stringify(r));
+    noticeList.value = r.data.value;
+    pagination.value = r.data.pagination;
   });
 };
 
 const onChangeSearchOption = (e: any) => {
   console.log(e.target.value);
-};
-
-const inputSearch = (e: any) => {
-  console.log('test');
-  searchString.value = e.target.value;
+  searchOption.value = e.target.value;
 };
 
 const onClickSearchButton = (e: any) => {
   console.log(searchString.value);
+  fetchNoticeList();
 };
 </script>
 

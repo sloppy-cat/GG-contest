@@ -1,9 +1,22 @@
 export interface Pagination {
-  last: boolean;
-  totalPages: number;
-  totalElements: number;
-  size: number;
-  numberOfElements?: number;
-  first: boolean; // 첫 패이지 여부
-  empty: boolean; // 리스트가 비어 있는지 여부
+  page?: number;
+  size?: number;
+  totalElements?: number;
+  totalPage?: number;
+  currentElements?: number;
+  currentPage?: number;
+  orderBy?: string;
+  sortBy?: string;
+  limit?: number;
+}
+
+export interface ResponseBody<T> {
+  common: {
+    code: number;
+    message: string;
+  };
+  data: {
+    value: T;
+    pagination?: Pagination;
+  };
 }
