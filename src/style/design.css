@@ -32,7 +32,6 @@ body {
   background-color: #f3f3f3;
 }
 
-
 header {
   width: 100%;
   height: 100px;
@@ -55,7 +54,6 @@ header {
   height: auto;
   margin-right: 64px;
 }
-
 
 nav {
   flex: 1;
@@ -120,30 +118,27 @@ nav {
   color: #6d69ff;
 }
 
-
-.sub-layer>aside {
+.sub-layer > aside {
   width: 100%;
   height: auto;
   position: relative;
 }
 
-.sub-layer>aside .sub-side {
+.sub-layer > aside .sub-side {
   position: relative;
   width: 1400px;
   margin: 0 auto;
 }
 
-.sub-layer>aside .sub-side img {
+.sub-layer > aside .sub-side img {
   width: 340px;
   height: auto;
   margin: 64px 0px 0px 105px;
 }
 
-
 .menu-btn {
   color: #fff;
 }
-
 
 footer {
   width: 100%;
@@ -192,9 +187,11 @@ footer {
   padding: 0px 0px 36px 0px;
 }
 
-.footer-info .footer-logo {}
+.footer-info .footer-logo {
+}
 
-.footer-info address {}
+.footer-info address {
+}
 
 .footer-info address dl {
   display: flex;
@@ -220,22 +217,18 @@ footer {
   display: flex;
   position: relative;
   justify-content: center;
-  min-width: 1400px;
+  /* min-width: 1400px; */
   min-height: 980px;
   height: auto;
   padding-bottom: 120px;
-
 }
 
-
-
 #sub-page {
-  width: 1400px;
+  /* width: 1400px; */
   height: auto;
   position: relative;
   margin: 0 auto;
 }
-
 
 .login-wrap {
   position: relative;
@@ -250,7 +243,6 @@ footer {
   border-radius: 12px;
 }
 
-
 .login-comp {
   position: relative;
   width: 100%;
@@ -260,8 +252,6 @@ footer {
   flex-flow: column;
   gap: 8px;
 }
-
-
 
 .login-comp .link {
   font-size: 16px;
@@ -284,7 +274,6 @@ footer {
   width: 100%;
 }
 
-
 .comp-wrap {
   position: relative;
   display: flex;
@@ -302,7 +291,6 @@ footer {
   padding: 50px 36px 14px 36px;
   display: flex;
   align-items: center;
-
 }
 
 .comp-footer {
@@ -313,20 +301,18 @@ footer {
   gap: 12px;
 }
 
-
 .comp-contents {
   padding: 64px 36px;
   display: flex;
   flex-flow: column;
 }
 
-
-.vertical-wrap {}
+.vertical-wrap {
+}
 
 .vertical-wrap .row {
   --bs-gutter-x: 0;
 }
-
 
 .comp-left {
   padding: 50px 36px 14px 36px;
@@ -346,7 +332,6 @@ footer {
   flex: 1;
 }
 
-
 .direct-comp {
   display: flex;
   align-items: center;
@@ -355,8 +340,6 @@ footer {
   line-height: 22px;
   gap: 6px;
 }
-
-
 
 .btn-wrap {
   position: relative;
@@ -380,7 +363,6 @@ footer {
   border-bottom: 0px #ddd solid;
 }
 
-
 .menu-group {
   margin: 30px 0px;
   flex: 1;
@@ -388,7 +370,8 @@ footer {
   flex-direction: column;
 }
 
-.list-menu {}
+.list-menu {
+}
 
 .list-menu li {
   font-size: 16px;
@@ -399,7 +382,8 @@ footer {
   gap: 14px;
 }
 
-.list-menu li a {}
+.list-menu li a {
+}
 
 .list-menu li a:hover {
   color: #5252ca;
@@ -416,7 +400,6 @@ footer {
   font-weight: 500;
 }
 
-
 .comp .text {
   font-size: 14px;
   display: flex;
@@ -428,9 +411,8 @@ footer {
   font-weight: 600;
 }
 
-
-.search-wrap {}
-
+.search-wrap {
+}
 
 .search-wrap .select {
   background-color: #f0f1f5;
@@ -438,8 +420,8 @@ footer {
   width: 25%;
 }
 
-.search-wrap .input {}
-
+.search-wrap .input {
+}
 
 .search-wrap .accordion .accordion-button {
   padding: 20px 20px;
@@ -463,11 +445,9 @@ footer {
   align-items: center;
 }
 
-
 .search-wrap .d-flex .form-check .form-check-label {
   line-height: 20px;
 }
-
 
 .tb-form .img-box {
   position: relative;
@@ -478,11 +458,11 @@ footer {
   height: 120px;
 }
 
+@media screen and (min-width: 840px) and (max-width: 1024px) {
+}
 
+@media screen and (min-width: 600px) and (max-width: 839px) {
+}
 
-
-@media screen and (min-width: 840px) and (max-width: 1024px) {}
-
-@media screen and (min-width: 600px) and (max-width: 839px) {}
-
-@media screen and (max-width: 599px) {}
+@media screen and (max-width: 599px) {
+}
