@@ -3,9 +3,33 @@ import type { AxiosResponse, CancelTokenSource } from 'axios';
 import type { ReqBodyLoginUser } from './types/User';
 import type Notice from './types/Notice';
 import type { ReqBodyCreateNotice, ReqBodyEditNotice, ResponseNoticeList } from './types/Notice';
+import randomstring from 'randomstring';
 
+const ran = randomstring;
 const dummyToken =
   'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOiJiZWFzdEBrdC5jb20iLCJzdWIiOiJ1c2VyIiwiaWF0IjoxNjgwMTQ3NzEzLCJleHAiOjE2ODAxNjU3MTN9.F5HyeWNDvfXzC7HpRnL8FE4zV2xdKZe9doNRBlB1sjE--TjZ90ThrdkSAuRF_WsAZAgLsX_BNkQ4VIr3jMRBv10yxmMr-lFQIR6aWk7hmN81S4Mi--vlYskUNPXRwDVBmP7DJjiEAjrQNX3RzHI1vT3na-i3t7feHj6smH-Bgk0sQ2nNVcyNUj4PNgA9WEPlpwRBSesqxxoimZIcKsnWyOwVm9eqPSggJ-0bJcO2ERjUp0NdCOtfeOy8ktwEIHKQlLv2hzwIT4IuAkolvbP5nBjBzYgItI0NmP9c0sjv3rKYsellBDczaAh2YzsYHgNoefrIJsoaz2qQPf3lEgmMLA';
+const dummyList: ResponseNoticeList[] = [];
+for (let i = 1; i <= 100; i++) {
+  dummyList.push({
+    id: ran.generate({
+      length: 50,
+      charset: 'alphabetic',
+    }),
+    title: ran.generate({
+      length: 30,
+      charset: 'alphabetic',
+    }),
+    createTime: new Date(),
+    createUser: ran.generate({
+      length: 10,
+      charset: 'alphabetic',
+    }),
+    content: ran.generate({
+      length: 300,
+      charset: 'alphabetic',
+    }),
+  });
+}
 export default class api {
   // 로그인
   async login(reqBodyLoginUser: ReqBodyLoginUser) {
@@ -28,8 +52,11 @@ export default class api {
   // 공지사항 목록
   async getNoticeList() {
     try {
-      const res = await Axios.get<ResponseNoticeList>('/notice');
-      return Promise.resolve(res);
+      // const res = await Axios.get<ResponseNoticeList[]>('/notice');
+      // return Promise.resolve(res);
+
+      //dummy
+      return Promise.resolve(dummyList);
     } catch (e: any) {
       return Promise.reject(e);
     }
